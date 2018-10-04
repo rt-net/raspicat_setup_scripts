@@ -1,0 +1,14 @@
+[Unit]
+Description=ROSCORE launcher
+After=raspimouse.service
+Requires=raspimouse.service
+
+[Service]
+User=ubuntu
+ExecStart=/usr/bin/screen -S raspicat-base-system -ADm bash -li -c '/home/ubuntu/raspicat_setup_scripts/launch_logicool_controller.sh'
+Type=simple
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
