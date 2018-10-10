@@ -1,7 +1,7 @@
 [Unit]
-Description=ROSCORE launcher
-After=raspimouse.service
-Requires=raspimouse.service
+Description=raspicat ros launcher
+After=raspicat.service
+Requires=raspicat.service
 
 [Service]
 User=ubuntu
