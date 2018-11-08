@@ -1,0 +1,14 @@
+[Unit]
+Description=raspimouse driver installer
+After=networking.service
+Requires=networking.service
+
+[Service]
+User=pi
+ExecStart=/usr/bin/screen -S raspicat-driver -ADm bash -li -c '/home/pi/raspicat_setup_scripts/setup_raspicat.sh'
+Type=simple
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

@@ -2,7 +2,9 @@
 
 set -eu
 
-sudo /sbin/insmod /home/ubuntu/RaspberryPiMouse/src/drivers/rtmouse.ko || sudo /bin/bash /home/ubuntu/RaspberryPiMouse/utils/build_install.ubuntu14.bash
+[ -d /home/pi ] && HOME=/home/pi || HOME=/home/ubuntu
+
+sudo /sbin/insmod $HOME/RaspberryPiMouse/src/drivers/rtmouse.ko || sudo /bin/bash $HOME/RaspberryPiMouse/utils/build_install.ubuntu14.bash
 sleep 1
 sudo /bin/chmod 666 /dev/rt*
 sleep 1
