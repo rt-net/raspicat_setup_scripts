@@ -1,2 +1,4 @@
 install:
-	sudo ./install.sh
+	sudo ./src/install.sh
+uninstall:
+	sudo ./src/uninstall.sh
