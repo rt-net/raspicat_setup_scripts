@@ -6,40 +6,45 @@ echo "これからモータを回転させます。"
 read -p "ホイールは浮かせていますか？ (y/N): " yn
 case "$yn" in [yY]*) ;; *) echo "エラー" ; exit 1 ;; esac
 
+ENCMAX=65535
+
 echo 0 | tee /dev/rtmotor_raw_* 1>/dev/null
 echo 1 > /dev/rtmotoren0
+
+echo "TEST A"
 ENC_R=$(cat /dev/rtcounter_r0)
 ENC_L=$(cat /dev/rtcounter_l0)
 echo 400 | tee /dev/rtmotor_raw_* 1>/dev/null
 sleep 1.0
 echo 0 | tee /dev/rtmotor_raw_* 1>/dev/null
-#65535
+#$ENCMAX
 DIFF_R=$(($(cat /dev/rtcounter_r0) - $ENC_R))
 DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
-if [[ $DIFF_R -gt -65535 ]] && [[ $DIFF_R -lt 0 ]]; then
-	DIFF_R=$(($DIFF_R + 65535))
+if [[ $DIFF_R -gt -$ENCMAX ]] && [[ $DIFF_R -lt 0 ]]; then
+	DIFF_R=$(($DIFF_R + $ENCMAX))
 fi
 if [[ $DIFF_R -gt 300 ]] && [[ $DIFF_R -lt 1000 ]]; then
 	echo "RIGHT OK"
 else
+	echo "RIGHT ERROR"
 	echo "echo 400 > /dev/rtmotor_raw_r0"
-	echo "ERROR"
 	echo "debug messege: right diff" $DIFF_R
 fi
 
-if [[ $DIFF_L -gt -65535 ]] && [[ $DIFF_L -lt 0 ]]; then
-	DIFF_L=$(($DIFF_L + 65535))
+if [[ $DIFF_L -gt -$ENCMAX ]] && [[ $DIFF_L -lt 0 ]]; then
+	DIFF_L=$(($DIFF_L + $ENCMAX))
 fi
 if [[ $DIFF_L -gt 300 ]] && [[ $DIFF_L -lt 1000 ]]; then
 	echo "LEFT OK"
 else
+	echo "LEFT ERROR"
 	echo "echo 400 > /dev/rtmotor_raw_l0"
-	echo "ERROR"
 	echo "debug messege: left diff" $DIFF_L
 fi
 
 sleep 0.1
 
+echo "TEST B"
 ENC_R=$(cat /dev/rtcounter_r0)
 ENC_L=$(cat /dev/rtcounter_l0)
 echo -400 | tee /dev/rtmotor_raw_* 1>/dev/null
@@ -47,29 +52,30 @@ sleep 1.0
 echo 0 | tee /dev/rtmotor_raw_* 1>/dev/null
 DIFF_R=$(($(cat /dev/rtcounter_r0) - $ENC_R))
 DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
-if [[ $DIFF_R -lt 65535 ]] && [[ $DIFF_R -gt 0 ]]; then
-	DIFF_R=$(($DIFF_R - 65535))
+if [[ $DIFF_R -lt $ENCMAX ]] && [[ $DIFF_R -gt 0 ]]; then
+	DIFF_R=$(($DIFF_R - $ENCMAX))
 fi
 if [[ $DIFF_R -lt -300 ]] && [[ $DIFF_R -gt -1000 ]]; then
 	echo "RIGHT OK"
 else
+	echo "RIGHT ERROR"
 	echo "echo -400 > /dev/rtmotor_raw_r0"
-	echo "ERROR"
 	echo "debug messege: right diff" $DIFF_R
 fi
-if [[ $DIFF_L -lt 65535 ]] && [[ $DIFF_L -gt 0 ]]; then
-	DIFF_L=$(($DIFF_L - 65535))
+if [[ $DIFF_L -lt $ENCMAX ]] && [[ $DIFF_L -gt 0 ]]; then
+	DIFF_L=$(($DIFF_L - $ENCMAX))
 fi
 if [[ $DIFF_L -lt -300 ]] && [[ $DIFF_L -gt -1000 ]]; then
 	echo "LEFT OK"
 else
+	echo "LEFT ERROR"
 	echo "echo -400 > /dev/rtmotor_raw_l0"
-	echo "ERROR"
 	echo "debug messege: left diff" $DIFF_L
 fi
 
 sleep 0.1
 
+echo "TEST C"
 ENC_R=$(cat /dev/rtcounter_r0)
 ENC_L=$(cat /dev/rtcounter_l0)
 echo 400 > /dev/rtmotor_raw_r0
@@ -78,29 +84,30 @@ sleep 1.0
 echo 0 | tee /dev/rtmotor_raw_* 1>/dev/null
 DIFF_R=$(($(cat /dev/rtcounter_r0) - $ENC_R))
 DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
-if [[ $DIFF_R -gt -65535 ]] && [[ $DIFF_R -lt 0 ]]; then
-	DIFF_R=$(($DIFF_R + 65535))
+if [[ $DIFF_R -gt -$ENCMAX ]] && [[ $DIFF_R -lt 0 ]]; then
+	DIFF_R=$(($DIFF_R + $ENCMAX))
 fi
 if [[ $DIFF_R -gt 300 ]] && [[ $DIFF_R -lt 1000 ]]; then
 	echo "RIGHT OK"
 else
-	echo "ERROR"
+	echo "RIGHT ERROR"
 	echo "echo 400 > /dev/rtmotor_raw_r0"
 	echo "debug messege: right diff" $DIFF_R
 fi
-if [[ $DIFF_L -lt 65535 ]] && [[ $DIFF_L -gt 0 ]]; then
-	DIFF_L=$(($DIFF_L - 65535))
+if [[ $DIFF_L -lt $ENCMAX ]] && [[ $DIFF_L -gt 0 ]]; then
+	DIFF_L=$(($DIFF_L - $ENCMAX))
 fi
 if [[ $DIFF_L -lt -300 ]] && [[ $DIFF_L -gt -1000 ]]; then
 	echo "LEFT OK"
 else
-	echo "ERROR"
+	echo "LEFT ERROR"
 	echo "echo -400 > /dev/rtmotor_raw_l0"
 	echo "debug messege: left diff" $DIFF_L
 fi
 
 sleep 0.1
 
+echo "TEST D"
 ENC_R=$(cat /dev/rtcounter_r0)
 ENC_L=$(cat /dev/rtcounter_l0)
 echo -400 > /dev/rtmotor_raw_r0
@@ -109,23 +116,23 @@ sleep 1.0
 echo 0 | tee /dev/rtmotor_raw_* 1>/dev/null
 DIFF_R=$(($(cat /dev/rtcounter_r0) - $ENC_R))
 DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
-if [[ $DIFF_R -lt 65535 ]] && [[ $DIFF_R -gt 0 ]]; then
-	DIFF_R=$(($DIFF_R - 65535))
+if [[ $DIFF_R -lt $ENCMAX ]] && [[ $DIFF_R -gt 0 ]]; then
+	DIFF_R=$(($DIFF_R - $ENCMAX))
 fi
 if [[ $DIFF_R -lt -300 ]] && [[ $DIFF_R -gt -1000 ]]; then
 	echo "RIGHT OK"
 else
-	echo "ERROR"
+	echo "RIGHT ERROR"
 	echo "echo -400 > /dev/rtmotor_raw_r0"
 	echo "debug messege: right diff" $DIFF_R
 fi
-if [[ $DIFF_L -gt -65535 ]] && [[ $DIFF_L -lt 0 ]]; then
-	DIFF_L=$(($DIFF_L + 65535))
+if [[ $DIFF_L -gt -$ENCMAX ]] && [[ $DIFF_L -lt 0 ]]; then
+	DIFF_L=$(($DIFF_L + $ENCMAX))
 fi
 if [[ $DIFF_L -gt 300 ]] && [[ $DIFF_L -lt 1000 ]]; then
 	echo "LEFT OK"
 else
-	echo "ERROR"
+	echo "LEFT ERROR"
 	echo "echo 400 > /dev/rtmotor_raw_l0"
 	echo "debug messege: left diff" $DIFF_L
 fi
