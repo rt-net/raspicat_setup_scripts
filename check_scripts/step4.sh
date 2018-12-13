@@ -19,7 +19,7 @@ DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
 if [[ $DIFF_R -gt -65535 ]] && [[ $DIFF_R -lt 0 ]]; then
 	DIFF_R=$(($DIFF_R + 65535))
 fi
-if [[ $DIFF_R -gt 400 ]] && [[ $DIFF_R -lt 800 ]]; then
+if [[ $DIFF_R -gt 300 ]] && [[ $DIFF_R -lt 1000 ]]; then
 	echo "RIGHT OK"
 else
 	echo "echo 400 > /dev/rtmotor_raw_r0"
@@ -30,7 +30,7 @@ fi
 if [[ $DIFF_L -gt -65535 ]] && [[ $DIFF_L -lt 0 ]]; then
 	DIFF_L=$(($DIFF_L + 65535))
 fi
-if [[ $DIFF_L -gt 400 ]] && [[ $DIFF_L -lt 800 ]]; then
+if [[ $DIFF_L -gt 300 ]] && [[ $DIFF_L -lt 1000 ]]; then
 	echo "LEFT OK"
 else
 	echo "echo 400 > /dev/rtmotor_raw_l0"
@@ -50,7 +50,7 @@ DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
 if [[ $DIFF_R -lt 65535 ]] && [[ $DIFF_R -gt 0 ]]; then
 	DIFF_R=$(($DIFF_R - 65535))
 fi
-if [[ $DIFF_R -lt -400 ]] && [[ $DIFF_R -gt -800 ]]; then
+if [[ $DIFF_R -lt -300 ]] && [[ $DIFF_R -gt -1000 ]]; then
 	echo "RIGHT OK"
 else
 	echo "echo -400 > /dev/rtmotor_raw_r0"
@@ -60,7 +60,7 @@ fi
 if [[ $DIFF_L -lt 65535 ]] && [[ $DIFF_L -gt 0 ]]; then
 	DIFF_L=$(($DIFF_L - 65535))
 fi
-if [[ $DIFF_L -lt -400 ]] && [[ $DIFF_L -gt -800 ]]; then
+if [[ $DIFF_L -lt -300 ]] && [[ $DIFF_L -gt -1000 ]]; then
 	echo "LEFT OK"
 else
 	echo "echo -400 > /dev/rtmotor_raw_l0"
@@ -81,7 +81,7 @@ DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
 if [[ $DIFF_R -gt -65535 ]] && [[ $DIFF_R -lt 0 ]]; then
 	DIFF_R=$(($DIFF_R + 65535))
 fi
-if [[ $DIFF_R -gt 400 ]] && [[ $DIFF_R -lt 800 ]]; then
+if [[ $DIFF_R -gt 300 ]] && [[ $DIFF_R -lt 1000 ]]; then
 	echo "RIGHT OK"
 else
 	echo "ERROR"
@@ -91,7 +91,7 @@ fi
 if [[ $DIFF_L -lt 65535 ]] && [[ $DIFF_L -gt 0 ]]; then
 	DIFF_L=$(($DIFF_L - 65535))
 fi
-if [[ $DIFF_L -lt -400 ]] && [[ $DIFF_L -gt -800 ]]; then
+if [[ $DIFF_L -lt -300 ]] && [[ $DIFF_L -gt -1000 ]]; then
 	echo "LEFT OK"
 else
 	echo "ERROR"
@@ -112,7 +112,7 @@ DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
 if [[ $DIFF_R -lt 65535 ]] && [[ $DIFF_R -gt 0 ]]; then
 	DIFF_R=$(($DIFF_R - 65535))
 fi
-if [[ $DIFF_R -lt -400 ]] && [[ $DIFF_R -gt -800 ]]; then
+if [[ $DIFF_R -lt -300 ]] && [[ $DIFF_R -gt -1000 ]]; then
 	echo "RIGHT OK"
 else
 	echo "ERROR"
@@ -122,7 +122,7 @@ fi
 if [[ $DIFF_L -gt -65535 ]] && [[ $DIFF_L -lt 0 ]]; then
 	DIFF_L=$(($DIFF_L + 65535))
 fi
-if [[ $DIFF_L -gt 400 ]] && [[ $DIFF_L -lt 800 ]]; then
+if [[ $DIFF_L -gt 300 ]] && [[ $DIFF_L -lt 1000 ]]; then
 	echo "LEFT OK"
 else
 	echo "ERROR"
