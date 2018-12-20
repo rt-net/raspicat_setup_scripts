@@ -12,5 +12,5 @@ while true ; do
 	R=`echo $SENSOR_VAL | grep -oP -e "\d*" | sed -n 1P`
 	RF=`echo $SENSOR_VAL | grep -oP -e "\d*" | sed -n 2P`
 	echo L: $L, LF: $LF, RF: $RF, R: $R
-	sleep 0.5
+	sleep 0.1
 done
