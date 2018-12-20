@@ -7,10 +7,10 @@ echo "対象とするセンサの前に手をかざし、値が小さく(200以�
 
 while true ; do
 	SENSOR_VAL=`cat /dev/rtlightsensor0`
-	L=`echo $SENSOR_VAL | grep -oP -e "\d*" | sed -n 1P`
-	LF=`echo $SENSOR_VAL | grep -oP -e "\d*" | sed -n 2P`
-	R=`echo $SENSOR_VAL | grep -oP -e "\d*" | sed -n 3P`
-	RF=`echo $SENSOR_VAL | grep -oP -e "\d*" | sed -n 4P`
+	L=`echo $SENSOR_VAL | grep -oP -e "\d*" | sed -n 4P`
+	LF=`echo $SENSOR_VAL | grep -oP -e "\d*" | sed -n 3P`
+	R=`echo $SENSOR_VAL | grep -oP -e "\d*" | sed -n 1P`
+	RF=`echo $SENSOR_VAL | grep -oP -e "\d*" | sed -n 2P`
 	echo L: $L, LF: $LF, RF: $RF, R: $R
 	sleep 0.5
 done
