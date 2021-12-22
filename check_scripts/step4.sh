@@ -12,14 +12,14 @@ echo 0 | tee /dev/rtmotor_raw_* 1>/dev/null
 echo 1 > /dev/rtmotoren0
 
 echo "TEST A"
-ENC_R=$(cat /dev/rtcounter_r0)
-ENC_L=$(cat /dev/rtcounter_l0)
+ENC_R=$(cat /dev/rtcounter_r1)
+ENC_L=$(cat /dev/rtcounter_l1)
 echo 200 | tee /dev/rtmotor_raw_* 1>/dev/null
 sleep 1.0
 echo 0 | tee /dev/rtmotor_raw_* 1>/dev/null
 #$ENCMAX
-DIFF_R=$(($(cat /dev/rtcounter_r0) - $ENC_R))
-DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
+DIFF_R=$(($(cat /dev/rtcounter_r1) - $ENC_R))
+DIFF_L=$(($(cat /dev/rtcounter_l1) - $ENC_L))
 if [[ $DIFF_R -gt -$ENCMAX ]] && [[ $DIFF_R -lt 0 ]]; then
 	DIFF_R=$(($DIFF_R + $ENCMAX))
 fi
@@ -45,13 +45,13 @@ fi
 sleep 0.1
 
 echo "TEST B"
-ENC_R=$(cat /dev/rtcounter_r0)
-ENC_L=$(cat /dev/rtcounter_l0)
+ENC_R=$(cat /dev/rtcounter_r1)
+ENC_L=$(cat /dev/rtcounter_l1)
 echo -200 | tee /dev/rtmotor_raw_* 1>/dev/null
 sleep 1.0
 echo 0 | tee /dev/rtmotor_raw_* 1>/dev/null
-DIFF_R=$(($(cat /dev/rtcounter_r0) - $ENC_R))
-DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
+DIFF_R=$(($(cat /dev/rtcounter_r1) - $ENC_R))
+DIFF_L=$(($(cat /dev/rtcounter_l1) - $ENC_L))
 if [[ $DIFF_R -lt $ENCMAX ]] && [[ $DIFF_R -gt 0 ]]; then
 	DIFF_R=$(($DIFF_R - $ENCMAX))
 fi
@@ -76,14 +76,14 @@ fi
 sleep 0.1
 
 echo "TEST C"
-ENC_R=$(cat /dev/rtcounter_r0)
-ENC_L=$(cat /dev/rtcounter_l0)
+ENC_R=$(cat /dev/rtcounter_r1)
+ENC_L=$(cat /dev/rtcounter_l1)
 echo 200 > /dev/rtmotor_raw_r0
 echo -200 > /dev/rtmotor_raw_l0
 sleep 1.0
 echo 0 | tee /dev/rtmotor_raw_* 1>/dev/null
-DIFF_R=$(($(cat /dev/rtcounter_r0) - $ENC_R))
-DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
+DIFF_R=$(($(cat /dev/rtcounter_r1) - $ENC_R))
+DIFF_L=$(($(cat /dev/rtcounter_l1) - $ENC_L))
 if [[ $DIFF_R -gt -$ENCMAX ]] && [[ $DIFF_R -lt 0 ]]; then
 	DIFF_R=$(($DIFF_R + $ENCMAX))
 fi
@@ -108,14 +108,14 @@ fi
 sleep 0.1
 
 echo "TEST D"
-ENC_R=$(cat /dev/rtcounter_r0)
-ENC_L=$(cat /dev/rtcounter_l0)
+ENC_R=$(cat /dev/rtcounter_r1)
+ENC_L=$(cat /dev/rtcounter_l1)
 echo -200 > /dev/rtmotor_raw_r0
 echo 200 > /dev/rtmotor_raw_l0
 sleep 1.0
 echo 0 | tee /dev/rtmotor_raw_* 1>/dev/null
-DIFF_R=$(($(cat /dev/rtcounter_r0) - $ENC_R))
-DIFF_L=$(($(cat /dev/rtcounter_l0) - $ENC_L))
+DIFF_R=$(($(cat /dev/rtcounter_r1) - $ENC_R))
+DIFF_L=$(($(cat /dev/rtcounter_l1) - $ENC_L))
 if [[ $DIFF_R -lt $ENCMAX ]] && [[ $DIFF_R -gt 0 ]]; then
 	DIFF_R=$(($DIFF_R - $ENCMAX))
 fi
