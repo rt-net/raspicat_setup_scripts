@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eu
 
-echo "Raspberry Pi Catテストスクリプト step4 Version 0.0.2"
+echo "Raspberry Pi Catテストスクリプト step4 Version 0.1.0"
 echo "これからモータを回転させます。"
 read -p "車体を平らな広いところに置いていますか？ (y/N): " yn
 case "$yn" in [yY]*) ;; *) echo "エラー" ; exit 1 ;; esac
